@@ -1,0 +1,106 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    /* ===========================
+       UTILISATEURS
+    =========================== */
+
+    match /users/{userId} {
+
+      allow read: if request.auth != null;
+
+      // Création d'un compte : uniquement client ou entreprise
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.role in ["client", "entreprise"];
+
+      // L'utilisateur peut modifier son profil
+      // mais PAS son rôle
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.role == resource.data.role;
+
+      // Suppression : uniquement un administrateur
+      allow delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       PROJETS
+    =========================== */
+
+    match /projects/{projectId} {
+
+      allow read: if true;
+
+      allow create, update, delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       GALERIE
+    =========================== */
+
+    match /gallery/{galleryId} {
+
+      allow read: if true;
+
+      allow create, update, delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       MESSAGES
+    =========================== */
+
+    match /messages/{messageId} {
+
+      allow create: if true;
+
+      allow read, update, delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       DEVIS
+    =========================== */
+
+    match /quotations/{quotationId} {
+
+      allow create: if request.auth != null;
+
+      allow read, update, delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       RENDEZ-VOUS
+    =========================== */
+
+    match /appointments/{appointmentId} {
+
+      allow create: if request.auth != null;
+
+      allow read, update, delete: if isAdmin();
+
+    }
+
+    /* ===========================
+       FONCTION ADMIN
+    =========================== */
+
+    function isAdmin() {
+
+      return request.auth != null
+        && get(
+          /databases/$(database)/documents/users/$(request.auth.uid)
+        ).data.role == "admin";
+
+    }
+
+  }
+
+}

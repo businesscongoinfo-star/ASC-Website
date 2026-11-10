@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Modifier un projet | ASC Website</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>ASC</h2>
+
+<ul>
+
+<li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+
+<li><a href="projects.html"><i class="fas fa-building"></i> Tous les projets</a></li>
+
+<li><a href="add-project.html"><i class="fas fa-plus-circle"></i> Ajouter un projet</a></li>
+
+<li><a href="clients.html"><i class="fas fa-users"></i> Clients</a></li>
+
+<li><a href="settings.html"><i class="fas fa-cog"></i> Paramètres</a></li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<h1>Modifier un projet</h1>
+
+<form id="editProjectForm">
+
+<label>Titre</label>
+
+<input
+type="text"
+id="title"
+required>
+
+<label>Ville</label>
+
+<input
+type="text"
+id="city"
+required>
+
+<label>Catégorie</label>
+
+<select id="category">
+
+<option>Villa</option>
+
+<option>Appartement</option>
+
+<option>Terrain</option>
+
+<option>Maison</option>
+
+<option>Bureau</option>
+
+</select>
+<label>Prix (FCFA)</label>
+
+<input
+type="number"
+id="price"
+required>
+
+<label>Surface (m²)</label>
+
+<input
+type="text"
+id="surface"
+required>
+
+<label>Nombre de chambres</label>
+
+<input
+type="number"
+id="bedrooms"
+required>
+
+<label>Nombre de salles de bain</label>
+
+<input
+type="number"
+id="bathrooms"
+required>
+
+<label>Statut</label>
+
+<select id="status">
+
+<option>Disponible</option>
+
+<option>Vendu</option>
+
+<option>Réservé</option>
+
+<option>En construction</option>
+
+</select>
+
+<label>Description</label>
+
+<textarea
+id="description"
+rows="6"
+placeholder="Description du projet..."></textarea>
+<br><br>
+
+<div class="form-actions">
+
+<button type="submit">
+
+💾 Enregistrer les modifications
+
+</button>
+
+<a href="projects.html" class="btn">
+
+⬅ Retour aux projets
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<script type="module" src="edit-project.js"></script>
+
+<script type="module" src="auth.js"></script>
+
+</body>
+
+</html>
